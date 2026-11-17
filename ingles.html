@@ -1,0 +1,80 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>El cole de la bruja</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#49336b,#181329 75%);color:#fff5dc;font:1.05rem system-ui;min-height:100vh}main{max-width:650px;margin:auto;padding:22px 16px}header{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.8rem;font-weight:bold;letter-spacing:.1em}article{background:#fff7e6;color:#302044;border-radius:28px;padding:clamp(18px,5vw,38px);margin-top:20px;text-align:center;box-shadow:0 10px 0 #130f2080}h1,h2{font-family:Georgia;margin:.4em 0}h1{font-size:clamp(2rem,8vw,3.6rem);line-height:1}button,input{font:inherit}button{border:0;border-radius:14px;padding:12px 16px;background:#6540a1;color:white;font-weight:700;cursor:pointer;margin:4px}button.secondary{background:#ede1fb;color:#40236a}button:focus-visible,input:focus-visible{outline:3px solid #a14700;outline-offset:3px}progress{width:100%;accent-color:#7445ad}#clue{display:grid;place-items:center;height:112px;font-size:4rem;background:#f1e7fc;border-radius:20px;margin:14px auto;max-width:250px}#clue svg{width:180px;height:100px}#pattern{font:700 clamp(1.25rem,6vw,2rem) monospace;white-space:pre-wrap;margin:12px 0}input{max-width:100%;width:300px;border:2px solid #7955a4;border-radius:12px;padding:12px;text-align:center;color:#302044;background:white}form button{display:block;margin:10px auto}#feedback{min-height:2.8em;margin-bottom:0}small{display:block;margin-top:12px}details{text-align:left;margin-top:20px}summary{cursor:pointer}footer{text-align:center;margin-top:20px;font-size:.85rem}.hero{font-size:4rem}.chip{background:#e8d5fa;padding:5px 12px;border-radius:99px;font-weight:bold;font-size:.9rem}
+</style>
+<main><header><span>✦ CLUB DE INGLÉS</span><span id="coverage"></span></header><article id="card"></article><footer>✦ Una aventura de letras para Mar ✦</footer></main>
+<script>
+const sets=[
+ ['Colegio','school|park|playground|toilet|computer room|classroom|corridor|library|gym|dining room','🏫|🌳🪑|🛝|🚽|🖥️|🪑📋|🚪🚪|📚|🏀|🍽️','colegio|parque|patio de recreo|baño|aula de informática|aula|pasillo|biblioteca|gimnasio|comedor'],
+ ['Colores','red|pink|green|blue|orange|brown|yellow|purple','#dc303b|#ee79a1|#358831|#2875cf|#ec7c19|#855034|#f6cf26|#813fba','rojo|rosa|verde|azul|naranja|marrón|amarillo|morado'],
+ ['Números','one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty'],
+ ['Posiciones','on|behind|above|under|in front of|between|among|in|next to|near|far','', 'encima, tocando|detrás|por encima, sin tocar|debajo|delante|entre dos|en medio de varios|dentro|al lado|cerca|lejos']
+];
+const groups=sets.map(([label,words,pics='',hints=''],group)=>words.split('|').map((word,i)=>({word,group,label,i,pic:pics.split('|')[i],hint:hints.split('|')[i]})));
+const card=document.querySelector('#card'), coverage=document.querySelector('#coverage');
+let memory={};
+try{memory=JSON.parse(localStorage.getItem('witch-spelling-v1'))||{}}catch{}
+let round=[], index=0, clean=0;
+const stat=word=>memory[word]||{count:0,level:0,retry:false};
+const shuffle=items=>items.map(item=>[Math.random(),item]).sort((a,b)=>a[0]-b[0]).map(pair=>pair[1]);
+function update(){coverage.textContent=groups.flat().filter(item=>stat(item.word).count).length+' / 49 practicadas'}
+function start(){
+ round=shuffle(groups.flatMap(group=>{
+  const items=shuffle(group);
+  const unseen=items.find(item=>!stat(item.word).count);
+  const first=unseen||items.sort((a,b)=>stat(a.word).count-stat(b.word).count)[0];
+  const others=items.filter(item=>item!==first);
+  const second=others.find(item=>stat(item.word).retry)||others.sort((a,b)=>stat(a.word).count-stat(b.word).count)[0];
+  return [first,second];
+ }));
+ index=0;clean=0;show();
+}
+function drawing(i){
+ const box=(x,y,opacity=1)=>'<rect x="'+x+'" y="'+y+'" width="40" height="32" rx="4" fill="#edbd76" fill-opacity="'+opacity+'" stroke="#7c4b27" stroke-width="2"/>';
+ const apple=(x,y)=>'<circle cx="'+x+'" cy="'+y+'" r="9" fill="#ce374b"/><path d="M'+x+' '+(y-8)+' l4 -6" stroke="#38733e" stroke-width="3"/>';
+ const [x,y]=[[90,36],[112,61],[90,23],[90,88],[90,75],[90,62],[90,53],[90,62],[119,63],[127,63],[161,63]][i];
+ let art=i===1?apple(x,y)+box(70,45):box(i===5||i===6?30:70,45,i===7?.45:1)+apple(x,y);
+ if(i===5||i===6)art+=box(110,45);
+ if(i===6)art+=box(70,10)+box(70,67);
+ return '<svg viewBox="0 0 180 105" aria-hidden="true">'+art+'</svg>';
+}
+function show(){
+ if(index===round.length){card.innerHTML='<div class="hero">🧹✨</div><h2>¡Ocho carteles arreglados!</h2><p>Has resuelto '+clean+' sin pistas y a la primera.</p><p>«¡Y yo que creía que el hueco de <i>gy m</i> era para aparcar mi escoba!»</p><button id="start">Otra partida</button>';document.querySelector('#start').onclick=start;return}
+ const item=round[index],{word,group,i,pic,hint,label}=item,previous=stat(word);
+ const letters=[...word], positions=letters.map((c,j)=>c===' '?-1:j).filter(j=>j>=0);
+ const holes=shuffle(positions).slice(0,positions.length<5?1:2).sort((a,b)=>a-b);
+ const typoIndex=holes[0];
+ const typo=letters.map((c,j)=>j===typoIndex?(c==='e'?'a':'e'):c).join('');
+ const level=previous.level;
+ const pattern=level===0?letters.map((c,j)=>holes.includes(j)?'_':c).join(''):level===1?typo:'';
+ const clue=[pic,'<svg viewBox="0 0 180 105" aria-hidden="true"><rect x="24" y="32" width="108" height="38" rx="10" fill="'+pic+'"/><path d="M130 32 L160 51 L130 70 Z" fill="'+pic+'"/><path d="M42 32v38m8-38v38" stroke="#0005" stroke-width="3"/></svg>',i+1,group===3?drawing(i):''][group];
+ card.innerHTML='<span class="chip">'+label+' · '+(index+1)+' de 8</span><progress aria-label="Retos resueltos" max="8" value="'+index+'"></progress><div id="clue" aria-hidden="true">'+clue+'</div><small>'+ (hint||'Puerta número '+(i+1))+'</small><h2>'+['Completa las letras','Corrige el cartel','Escribe en inglés'][level]+'</h2><div id="pattern" lang="en">'+pattern+'</div><button class="secondary" id="listen">🔊 Escuchar</button><button class="secondary" id="hint">💡 Ver pista</button><form><input id="answer" aria-label="'+(level===0?'Letras que faltan':'Respuesta en inglés')+'" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="'+(level===0?'Solo las letras que faltan':'Palabra o expresión completa')+'" required><button>Comprobar</button></form><p id="feedback" role="status"></p>';
+ const answer=document.querySelector('#answer'), feedback=document.querySelector('#feedback'), form=card.querySelector('form');
+ let assisted=false,wrong=false,timer;
+ document.querySelector('#listen').onclick=()=>{
+  if(!('speechSynthesis' in window)){feedback.textContent='Este navegador no tiene lectura en voz alta.';return}
+  speechSynthesis.cancel();const voice=new SpeechSynthesisUtterance(word);voice.lang='en-GB';voice.rate=.8;
+  voice.onerror=e=>{if(!['canceled','interrupted'].includes(e.error))feedback.textContent='El audio no está disponible en este navegador.'};
+  speechSynthesis.speak(voice);
+ };
+ document.querySelector('#hint').onclick=()=>{assisted=true;clearTimeout(timer);feedback.textContent=word;feedback.lang='en';timer=setTimeout(()=>{feedback.textContent='';feedback.lang='es'},3000)};
+ form.onsubmit=e=>{
+  e.preventDefault();clearTimeout(timer);feedback.lang='es';
+  const typed=answer.value.trim().toLowerCase().replace(/\s+/g,' ');
+  const missing=holes.map(j=>letters[j]).join('');
+  if(typed!==word && !(level===0&&typed.replace(/ /g,'')===missing)){
+   wrong=true;feedback.textContent=level===0?'Revisa las '+holes.length+(holes.length===1?' letra que falta.':' letras que faltan, de izquierda a derecha.'):'Revisa las letras y, si hay varias palabras, el espacio entre ellas.';answer.focus();return;
+  }
+  const retry=assisted||wrong;if(!retry)clean++;
+  memory[word]={count:previous.count+1,level:retry?0:Math.min(2,level+1),retry};
+  try{localStorage.setItem('witch-spelling-v1',JSON.stringify(memory))}catch{}
+  update();feedback.textContent='¡Cartel arreglado! '+word;document.querySelector('#hint').disabled=true;
+  form.innerHTML='<button type="button" id="next">'+(index===7?'Ver resultado':'Siguiente cartel')+'</button>';
+  document.querySelector('#next').onclick=()=>{index++;show()};
+  document.querySelector('#next').focus();
+ };
+}
+update();
+card.innerHTML='<div class="hero">🧙‍♀️</div><h1>El cole de la bruja</h1><p>¡La bruja ha hecho desaparecer letras de los carteles del cole! Ayuda a Mar a recuperarlas escribiendo en inglés.</p><button id="start">Empezar la aventura</button><small>8 retos por partida · Sin cronómetro</small><details><summary>Las 49 palabras y expresiones</summary>'+groups.map(group=>'<p><strong>'+group[0].label+'</strong><br><span lang="en">'+group.map(x=>x.word).join(', ')+'</span></p>').join('')+'</details>';
+document.querySelector('#start').onclick=start;
+</script></html>
