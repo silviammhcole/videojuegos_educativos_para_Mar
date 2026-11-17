@@ -1,63 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La aventura de las decenas · 1.º de Primaria</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>El rincón de juegos de Mar</title>
 <style>
-/* Fuente manuscrita escolar cuando hay conexión; alternativa local si no la hay. */
-@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400;500;600;700&display=swap');
-
-:root{--ink:#26344b;--muted:#68798e;--bg:#f2f7ff;--card:#fff;--red:#ec5964;--red-d:#cc3d4c;--blue:#4d99ef;--blue-d:#2f73bf;--green:#21845b;--gold:#ecad39;--line:#dce7f5;--shadow:0 12px 32px rgba(49,78,118,.12)}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 8% 0%,#fff3d8,transparent 28%),radial-gradient(circle at 95% 12%,#dbefff,transparent 32%),var(--bg);color:var(--ink);font:20px/1.45 "Edu NSW ACT Cursive","Comic Neue","Comic Sans MS",cursive}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:4px solid #f3af39;outline-offset:3px}.wrap{max-width:1050px;margin:auto;padding:24px 18px 42px}.top{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.brand{font-weight:900;letter-spacing:.02em;font-size:clamp(24px,4vw,38px)}.brand span{color:#db4856}.tag{background:#e3edff;color:#265c9e;padding:7px 14px;border-radius:30px;font-size:14px;font-weight:800}.intro{margin:5px 0 20px;color:var(--muted)}.bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}.switch{display:inline-flex;border-radius:15px;background:white;padding:5px;border:1px solid var(--line);gap:4px}.switch button{border:0;background:transparent;padding:9px 13px;border-radius:10px;font-size:15px;font-weight:800;color:#46617f}.switch button[aria-pressed="true"]{color:white;background:#3c70ce}.score{margin-left:auto;background:white;padding:10px 15px;border:1px solid var(--line);border-radius:14px;font-weight:800}.progress{height:10px;background:#dce7f6;border-radius:99px;overflow:hidden;margin:8px 0 19px}.progress div{height:100%;width:0;background:linear-gradient(90deg,#62b89b,#3d88db);transition:width .3s}.layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:18px}.panel{background:var(--card);border-radius:25px;padding:24px;border:1px solid var(--line);box-shadow:var(--shadow)}.eyebrow{color:#6686b0;font-size:14px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.question{font-size:clamp(23px,3.4vw,34px);font-weight:900;margin:5px 0 14px;line-height:1.24}.hint{color:var(--muted);font-size:16px;margin:0 0 12px}.workspace{background:#f8fbff;border:2px dashed #bfd4f1;border-radius:19px;min-height:190px;padding:15px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px}.blocks{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;min-height:62px}.ten{display:grid;grid-template-columns:repeat(10,12px);gap:1px;padding:4px;background:var(--red-d);border-radius:7px;box-shadow:0 4px 0 #b72f3d}.ten i{display:block;width:12px;height:29px;background:var(--red);border-radius:3px;border:1px solid #ffb1b6}.unit{display:inline-block;width:28px;height:29px;background:var(--blue);border:2px solid var(--blue-d);border-radius:6px;box-shadow:0 3px 0 #1c65a6}.unitset{display:flex;gap:6px;flex-wrap:wrap;max-width:300px;justify-content:center}.empty{color:#7d8ea1;font-weight:700;font-size:16px;text-align:center}.tabledu{display:grid;grid-template-columns:1fr 1fr;width:min(270px,100%);border:3px solid #a6bfe2;border-radius:14px;overflow:hidden;background:#fff}.tabledu .th{background:#e7f0ff;font-weight:900;text-align:center;padding:7px;border-bottom:2px solid #a6bfe2}.tabledu .th:first-child,.tabledu .cell:first-of-type{border-right:2px solid #a6bfe2}.tabledu .cell{text-align:center;font-size:38px;font-weight:900;padding:8px}.tabledu .cell:last-child{border-left:2px solid #a6bfe2}.answers{margin-top:18px}.options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.answer{border:2px solid #c8dcf3;background:#f9fcff;color:#1b4a81;padding:11px;border-radius:15px;min-height:62px;font-size:28px;font-weight:900}.answer:hover:not(:disabled){background:#e8f3ff}.answer:disabled{opacity:.58;cursor:default}.answer.correct{background:#d9f4e6;border-color:#46a879;color:#166748;opacity:1}.answer.wrong{background:#ffe4e6;border-color:#dc6973;color:#9a3740;opacity:1}.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}.primary{background:#3b72d3;color:white;border:none;border-radius:14px;padding:12px 21px;font-weight:900;box-shadow:0 4px 0 #2856a9}.primary:hover{background:#2e62bf}.secondary{background:white;color:#42648b;border:2px solid #d7e4f3;border-radius:14px;padding:10px 14px;font-weight:800}.feedback{min-height:47px;margin-top:13px;font-weight:850;text-align:center;padding:9px;border-radius:12px}.feedback.ok{color:#13754c;background:#def7e9}.feedback.no{color:#a14d2b;background:#fff0d8}.side h2{font-size:20px;margin:0 0 12px}.legend{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:12px 0;font-size:16px}.legend .ten{transform:scale(.64);transform-origin:left center;margin-right:-42px}.legend .unit{transform:scale(.84);margin-right:-2px}.info{background:#f0f6ff;border-radius:15px;padding:14px;font-size:15px;line-height:1.5;margin-top:15px}.info strong{color:#275aa0}.modebox{margin-top:16px;border-top:1px solid var(--line);padding-top:15px}.modebox label{display:block;font-size:15px;font-weight:800;margin:6px 0}.small{font-size:14px;color:var(--muted)}.counter{font-size:15px;font-weight:900;color:#56769b}.build-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0}.build-controls button{border:2px solid #b9cde8;background:white;color:#365c88;padding:10px 14px;border-radius:14px;font-weight:900;min-height:55px}.build-controls button:hover{background:#edf5ff}.big-number{font-size:66px;font-weight:950;color:#376fce;line-height:1.1}.du-select{display:flex;justify-content:center;gap:16px;margin:15px 0}.du-select label{text-align:center;font-weight:900}.du-select select{display:block;width:90px;margin-top:4px;font-size:30px;padding:7px;border-radius:10px;border:2px solid #aac3e6;text-align:center;background:white}.final{font-size:28px;text-align:center;font-weight:900}.hide{display:none!important}footer{text-align:center;color:#798aa1;font-size:13px;margin-top:18px}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:750px){.layout{grid-template-columns:1fr}.score{margin-left:0}.panel{padding:17px}.options{gap:7px}.answer{min-height:58px}.workspace{min-height:155px}.side{order:2}}@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-
-/* Botones grandes, de elección visual y apropiados para lectores iniciales */
-.icon-key{display:flex;align-items:center;justify-content:center;gap:12px;min-height:84px!important;padding:9px 13px!important;flex:1 1 140px}
-.icon-key .ten{transform:scale(.84);margin:0 0 0 -10px}
-.icon-key .unit{transform:scale(1.08)}
-.icon-key .op{font:bold 34px/1 system-ui,sans-serif;color:#27538c}
-.build-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
-.visu-label{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:900}
-.visu-label .ten{transform:scale(.55);margin:0 -23px 0 -31px}
-.visu-label .unit{transform:scale(.8)}
-.speech{border:2px solid #cbdcf3;background:#eff6ff;border-radius:13px;font-weight:800;padding:8px 12px;min-height:45px}
-.speech:disabled{opacity:.45}
-.heading-line{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.answer{font-family:system-ui,sans-serif}
-.du-select select{font-family:system-ui,sans-serif}
-.big-number{font-family:system-ui,sans-serif}
-@media(max-width:530px){.icon-key{min-height:70px!important;flex-basis:auto}.build-controls{gap:7px}.question{font-size:26px}}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,sans-serif;background:#fff8f3;color:#293554}
+header{text-align:center;padding:40px 20px;background:linear-gradient(120deg,#fbc5de,#c4dbff)}
+h1{font-size:32px}
+main{max-width:1000px;margin:auto;padding:25px 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.game{display:block;padding:25px;background:white;border:2px solid #ede5ed;border-radius:24px;text-decoration:none;color:inherit;box-shadow:0 6px 18px #34426610}
+.game:focus-visible{outline:4px solid #7768d9}
+.emoji{font-size:45px}
+h2{font-size:24px}
+p{line-height:1.5}
+.play{display:inline-block;padding:8px 16px;border-radius:20px;background:#e1f6eb;color:#176345;font-weight:bold}
+footer{text-align:center;padding:25px}
 </style>
 </head>
 <body>
-<main class="wrap">
-<header><div class="top"><div class="brand">🧩 La aventura de las <span>decenas</span></div><div class="tag">1.º de Primaria · Matemáticas</div></div><p class="intro">¡Mira, construye y descubre números usando decenas rojas y unidades azules!</p></header>
-<div class="bar"><span class="small"><strong>Números para jugar:</strong></span><div class="switch" role="group" aria-label="Rango de números"><button id="range9" aria-pressed="true">Del 9 al 20</button><button id="range0" aria-pressed="false">Del 0 al 20</button></div><div class="score" aria-live="polite">⭐ <span id="points">0</span> puntos</div></div>
-<div class="progress" aria-label="Progreso de la partida"><div id="progress"></div></div>
-<div class="layout"><section class="panel" aria-labelledby="qtitle"><div class="counter" id="counter">Reto 1 de 12</div><div class="heading-line"><div class="eyebrow" id="modeLabel">Observa las regletas</div><button class="speech" id="listen" type="button" aria-label="Escuchar las instrucciones">🔊 Escuchar</button></div><h1 class="question" id="qtitle">¿Qué número ves?</h1><p class="hint" id="instruction">Una barra roja vale 10. Cada cubito azul vale 1.</p><div id="work" class="workspace"></div><div id="answers" class="answers"></div><div id="feedback" class="feedback" aria-live="polite"></div><div class="actions"><button class="primary hide" id="next">Siguiente reto →</button><button class="secondary" id="restart">↻ Empezar de nuevo</button></div></section>
-<aside class="panel side"><h2>🔍 Recuerda</h2><div class="legend"><div class="ten" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span><strong>1 decena</strong> = 10 unidades</span></div><div class="legend"><div class="unit" aria-hidden="true"></div><span><strong>1 unidad</strong> = 1 cubito</span></div><div class="info">En la tabla <strong>D / U</strong>:<br><strong>D</strong> significa decenas.<br><strong>U</strong> significa unidades.<br><br>Ejemplo: <strong>13 = 1 D + 3 U</strong>.<br>Y <strong>20 = 2 D + 0 U</strong>.</div><div class="modebox"><h2>🎯 ¿Qué practicamos?</h2><p class="small">Mirar y contar, construir números y completar las decenas y unidades. Cada partida recorre todos los números del rango seleccionado.</p><p class="small">No se necesita cuenta ni conexión a Internet. También funciona con ratón, teclado y pantalla táctil.</p></div></aside></div><footer>Juego educativo · Sin anuncios, registros ni recopilación de datos · El progreso se reinicia al cerrar la página</footer>
+<header>
+<h1>🌈 El rincón de juegos de Mar</h1>
+<p>¡Aprender jugando es una aventura! ✨</p>
+</header>
+<main>
+<div class="grid">
+<a class="game" href="ingles.html">
+<span class="emoji">🇬🇧</span>
+<h2>Aventura de inglés</h2>
+<p>Números, colores, preposiciones y lugares del colegio.</p>
+<span class="play">▶ Jugar</span>
+</a>
+
+<a class="game" href="bruja_casa.html">
+<span class="emoji">🧙‍♀️</span>
+<h2>La casa de la bruja</h2>
+<p>Otra aventura para practicar inglés.</p>
+<span class="play">▶ Jugar</span>
+</a>
+
+<a class="game" href="Mar_siete_llaves_lengua.html">
+<span class="emoji">🗝️</span>
+<h2>Lengua: las siete llaves</h2>
+<p>48 retos de palabras, nombres, signos, lectura y cortesía.</p>
+<span class="play">▶ Jugar</span>
+</a>
+</div>
 </main>
-<script>
-(()=>{'use strict';
-const $=id=>document.getElementById(id);let min=9,round=0,points=0,locked=false,current=null,selection={t:0,u:0},sequence=[],spoken="";const total=()=>21-min;
-const rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
-const shuffle=a=>{for(let i=a.length-1;i>0;i--){let j=rand(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
-const digits=n=>({t:Math.floor(n/10),u:n%10});
-function ten(){return '<span class="ten" role="img" aria-label="una decena">'+Array(10).fill('<i></i>').join('')+'</span>'}
-function blocks(t,u){let res='<div class="blocks" aria-label="'+t+' decenas y '+u+' unidades">';res+=Array(t).fill(ten()).join('');if(u)res+='<span class="unitset">'+Array(u).fill('<span class="unit" aria-hidden="true"></span>').join('')+'</span>';if(!t&&!u)res+='<span class="empty">No hay barras ni cubitos: cero unidades.</span>';return res+'</div>'}
-function du(t,u){return '<div class="tabledu" aria-label="Tabla de decenas y unidades"><div class="th">D</div><div class="th">U</div><div class="cell">'+t+'</div><div class="cell">'+u+'</div></div>'}
-function choose(){let types=['read','build','du'];let type=types[round%3];let n=sequence[round];return{type,n,...digits(n)}}
-function show(){locked=false;selection={t:0,u:0};current=choose();$('counter').textContent='Reto '+(round+1)+' de '+total();$('progress').style.width=round/total()*100+'%';$('next').classList.add('hide');$('feedback').textContent='';$('feedback').className='feedback';$('answers').innerHTML='';$('points').textContent=points;
-const {type,n,t,u}=current;
-if(type==='read'){$('modeLabel').textContent='👀 Mira y cuenta';$('qtitle').textContent='👀 ¿Cuántos hay?';$('instruction').textContent='Mira las barras rojas y los cubitos azules. Marca el número.';spoken='Mira las barras rojas y los cubitos azules. Cuenta y marca el número.';$('work').innerHTML=blocks(t,u);let opts=new Set([n]);while(opts.size<3)opts.add(rand(min,20));$('answers').innerHTML='<div class="options">'+shuffle([...opts]).map(x=>'<button class="answer" data-num="'+x+'">'+x+'</button>').join('')+'</div>';$('answers').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>check(Number(b.dataset.num)===n,b)));}
-if(type==='build'){$('modeLabel').textContent='🧱 Construye';$('qtitle').textContent='🧱 Haz el '+n;$('instruction').textContent='Pulsa las barras y los cubitos. Después, comprueba.';spoken='Construye el número '+n+'. Pulsa más para añadir barras rojas y cubitos azules. Pulsa menos para quitar.';renderBuild();$('answers').innerHTML='<div class="build-controls"><button id="addTen" class="icon-key" aria-label="Añadir una barra roja, una decena"><span class="op">+</span>'+ten()+'</button><button id="addUnit" class="icon-key" aria-label="Añadir un cubito azul, una unidad"><span class="op">+</span><span class="unit" aria-hidden="true"></span></button><button id="removeTen" class="icon-key" aria-label="Quitar una barra roja, una decena"><span class="op">−</span>'+ten()+'</button><button id="removeUnit" class="icon-key" aria-label="Quitar un cubito azul, una unidad"><span class="op">−</span><span class="unit" aria-hidden="true"></span></button></div><div class="actions"><button class="primary" id="checkBuild">✓ Comprobar</button></div>';const edit=(key,delta,max)=>{if(locked)return;selection[key]=Math.max(0,Math.min(max,selection[key]+delta));renderBuild()};$('addTen').onclick=()=>edit('t',1,2);$('addUnit').onclick=()=>edit('u',1,9);$('removeTen').onclick=()=>edit('t',-1,2);$('removeUnit').onclick=()=>edit('u',-1,9);$('checkBuild').onclick=()=>check(selection.t===t&&selection.u===u);}
-if(type==='du'){$('modeLabel').textContent='📋 D / U';$('qtitle').textContent='👀 → D / U';$('instruction').textContent='Cuenta las barras rojas y los cubitos azules.';spoken='Mira las barras rojas y los cubitos azules. Elige cuántas decenas hay en la columna D y cuántas unidades en la columna U.';$('work').innerHTML=blocks(t,u);$('answers').innerHTML='<div class="du-select"><label><span class="visu-label">D '+ten()+'</span><select id="selD" aria-label="Decenas"><option value="">?</option>'+[0,1,2].map(x=>'<option>'+x+'</option>').join('')+'</select></label><label><span class="visu-label">U <span class="unit" aria-hidden="true"></span></span><select id="selU" aria-label="Unidades"><option value="">?</option>'+Array.from({length:10},(_,x)=>'<option>'+x+'</option>').join('')+'</select></label></div><div class="actions"><button class="primary" id="checkDU">Comprobar ✓</button></div>';$('checkDU').onclick=()=>{if($('selD').value===''||$('selU').value===''){say('Elige una cifra en cada columna.','no');return}check(Number($('selD').value)===t&&Number($('selU').value)===u)};}
-}
-$('listen').onclick=()=>{if(!('speechSynthesis' in window))return;window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(spoken);utterance.lang='es-ES';utterance.rate=.85;window.speechSynthesis.speak(utterance)};if(!('speechSynthesis' in window))$('listen').disabled=true;
-function renderBuild(){$('work').innerHTML='<div class="big-number">'+current.n+'</div>'+blocks(selection.t,selection.u)+du(selection.t,selection.u)}
-function say(msg,kind){$('feedback').textContent=msg;$('feedback').className='feedback '+kind}
-function check(ok,button){if(locked)return;if(ok){locked=true;points+=10;$('points').textContent=points;if(button)button.classList.add('correct');say('¡Muy bien! '+current.n+' = '+current.t+' D y '+current.u+' U. 🎉','ok');$('answers').querySelectorAll('button,select').forEach(el=>el.disabled=true);$('next').textContent=round===total()-1?'Ver mi resultado ⭐':'Siguiente reto →';$('next').classList.remove('hide')}else{if(button){button.classList.add('wrong');button.disabled=true}say('Casi. Mira de nuevo las decenas rojas y las unidades azules. ¡Inténtalo otra vez!','no')}}
-function finish(){$('progress').style.width='100%';$('counter').textContent='¡Partida completada!';$('modeLabel').textContent='🏆 ¡Lo conseguiste!';$('qtitle').textContent='¡Enhorabuena!';$('instruction').textContent='Has practicado números, decenas y unidades.';$('work').innerHTML='<div class="final">🌟<br>Has conseguido '+points+' puntos<br><span class="small">¡Cada intento te ayuda a aprender!</span></div>';$('answers').innerHTML='';$('feedback').textContent='';$('feedback').className='feedback';$('next').classList.add('hide');}
-function reset(){round=0;points=0;sequence=shuffle(Array.from({length:total()},(_,i)=>min+i));show()};$('next').onclick=()=>{if(!locked)return;round++;if(round>=total())finish();else show()};$('restart').onclick=reset;
-function range(value){min=value;$('range9').setAttribute('aria-pressed',String(value===9));$('range0').setAttribute('aria-pressed',String(value===0));reset()};$('range9').onclick=()=>range(9);$('range0').onclick=()=>range(0);reset();
-})();
-</script>
-</body></html>
+<footer>Hecho con cariño para Mar 💖</footer>
+</body>
+</html>
